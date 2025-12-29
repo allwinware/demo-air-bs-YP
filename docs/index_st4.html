@@ -113,7 +113,7 @@
 			return;
 		}
 		
-		if (paxCnt > 4) {
+		if (paxCnt > 5) {
 			return;
 		}
 	
@@ -133,7 +133,6 @@
 				var purchsedSeatLt	= paxInfo.paxList.map((e) => e.selSeat).filter((seat) => seat);
 				
 				$("[footerBtn=shift]").removeClass("active");
-				$(".footer-first-pop").find("[purchsedLt]").html(purchsedSeatLt.map((e) => e.seatNo).join(","));
 			},100);
 		});
 	}
@@ -176,10 +175,10 @@
 	
 			var purchsedSeatNoMap	= {
 				"1"	: () => ["14A"],
-				"2"	: () => ["14B", "14B"],
+				"2"	: () => ["14A", "14B"],
 				"3"	: () => ["16A", "16B", "16C"],
 				"4"	: () => ["20A", "20B", "20C", "20D"],
-	// 			"5"	: () => ["11A", "11B", "11C", "11A", "11B"],
+				"5"	: () => ["15A", "15B", "15C", "16A", "16B"],
 	// 			"6"	: () => ["12A", "12B", "12C", "13A", "13B", "13C"],
 	// 			"7"	: () => ["22A", "22B", "22C", "23A", "23B", "24A", "24B"],
 	// 			"8"	: () => ["27A", "27B", "27E", "27F", "28A", "28B", "28E", "28F"],
@@ -263,38 +262,38 @@
 	
 			// x버튼
 			if (purchsSeatNoLt.length > 1) {
-				seatMap.find(".cancel_xx").css({top: (rowLstSeatEl.position().top-7)+"px", left: (rowLstSeatEl.position().left+rowLstSeatEl.width()-5)+"px"});
-				seatMap.find(".cancel_xx").show();
-				seatMap.find(".cancel_xx").one("click", () => {
-					for (var j=0; j<blockPlusLt.length; j++) {
-						var target		= seatMap.find("[seatno="+blockPlusLt[j].seatNo+"]");
-						target.off().one("click", function() {
-							var seatNo		= $(this).attr("seatno");
-							var plusSeat	= blockPlusLt.filter((e) => e.seatNo == seatNo)[0];
-							var blockSeatLt	= seatList.filter((e) => e.rowIdx == plusSeat.rowIdx && e.blockIdx == plusSeat.blockIdx);
-							var plusSeatLt	= blockPlusLt.filter((e) => e.rowIdx == plusSeat.rowIdx && e.blockIdx == plusSeat.blockIdx);
+// 				seatMap.find(".cancel_xx").css({top: (rowLstSeatEl.position().top+5)+"px", left: (rowLstSeatEl.position().left+rowLstSeatEl.width())-18+"px"});
+// 				seatMap.find(".cancel_xx").show();
+// 				seatMap.find(".cancel_xx").one("click", () => {
+// 					for (var j=0; j<blockPlusLt.length; j++) {
+// 						var target		= seatMap.find("[seatno="+blockPlusLt[j].seatNo+"]");
+// 						target.off().one("click", function() {
+// 							var seatNo		= $(this).attr("seatno");
+// 							var plusSeat	= blockPlusLt.filter((e) => e.seatNo == seatNo)[0];
+// 							var blockSeatLt	= seatList.filter((e) => e.rowIdx == plusSeat.rowIdx && e.blockIdx == plusSeat.blockIdx);
+// 							var plusSeatLt	= blockPlusLt.filter((e) => e.rowIdx == plusSeat.rowIdx && e.blockIdx == plusSeat.blockIdx);
 	
-							if (blockSeatLt.length == plusSeatLt.length) {
-								segCtl.selBlockSeat(plusSeatLt);
-							} else {
-								segCtl.selPlusSeat(plusSeat);
-							}
+// 							if (blockSeatLt.length == plusSeatLt.length) {
+// 								segCtl.selBlockSeat(plusSeatLt);
+// 							} else {
+// 								segCtl.selPlusSeat(plusSeat);
+// 							}
 	
-							_this.setSelContents();
-						});
-					}
+// 							_this.setSelContents();
+// 						});
+// 					}
 	
-					seatMap.find(".cancel_xx").hide();
-					seatMap.find(".ballon_box2").hide();
-					seatMap.find("svg").html("");
-				})
+// 					seatMap.find(".cancel_xx").hide();
+// 					seatMap.find(".ballon_box2").hide();
+// 					seatMap.find("svg").html("");
+// 				})
 	
 				// border
-				seatMap.find("svg").html(commSeatDisp.getBlockBorderHtml(segIdx, fullSeatLt));
+// 				seatMap.find("svg").html(commSeatDisp.getBlockBorderHtml(segIdx, fullSeatLt));
 			}
 	
 			// 말풍선
-			seatMap.find(".ballon_box2").css({top: (rowFstSeatEl.position().top-50)+"px", left: (rowFstSeatEl.position().left-35)+"px"});
+			seatMap.find(".ballon_box2").css({top: (rowFstSeatEl.position().top-38)+"px", left: (rowFstSeatEl.position().left-45)+"px"});
 			seatMap.find(".ballon_box2").show();
 		},
 		// 선택내용 contents apply
@@ -359,7 +358,8 @@
 	
 			function getOccupiedLt(segIdx) {
 				var occupiedLt	= {
-					"1"			: () => ["10A","10B","10C","10E","10F","10G","10J","11C","11D","11E","11F","11G","11H","11J","12C","12J","18A","18B","18F","18G"],
+					"1"			: () => ["1A","1B","1D","1E","1F","1H","1J","2A","2B","2D","2E","2F","3A","3B","3D","3E","3F","3H","3J","4D","4E","4F","4H","4J","5A","5B","5D","5E","5F","5H","5J","6A","6B","7A","7B","7D","7E","7F","7H","7J","8A","8B","8D","8E","8F","8H","8J","11C","11D","11E","11F","11G","11H","11J","12C","12J","18A","18B","18F","18G","21G","21H","21J","22A","22B","22C","22D","22E"
+										,"26A","26B","26C","26G","26H","26J","27A","27B","27C","27D","27E","27F","27G","27H","27J","28A","28B","28C","28D","28E","28F","28G","29A","29B","29C","29D","29E","29F","29G","29H","29J","30A","30B","30C","30D","30E","30F","30G","30H","30J","31F","31G","31H","31J","32A","32B","32C","32D","32E","32F","32G","32H","32J","33A","33B","33C","33D","33E","33F""34A","34B","34C","34G","34H","34J","35A","35B","35C","35D","35E","35F","35G","35H","35J","36C","36D","36E","36F","36G","36H","36J","37C","37D","37E","37F","37G","37H","37J","38A","38B","38C","38D","38E","38F","38G","38H","38J","39D","39E","39F"],
 					"2"			: () => [],
 					"_default"	: () => []
 				}
@@ -435,41 +435,43 @@
 			<h1 class="site-name">올윈에어</h1>
 			<div class="dimmed_bgs"></div>
 			<header>
-				<div class="ags-header">
-					<a href="javascript:history.back();" class="btn_back">뒤로가기</a>
-					<div class="ags-header-logo"></div>
-				</div>	
-				<div class="gnb_menu">
-					<div class="finger_demo1" style="display: none;"></div>
-					
-					<div class="demo_gnb_menu2_2"></div> 
-					<div class="demo_gnb_menu3">
-							<div onclick="window.location.href='index_st1.html';">예약자 확인</div>						
-							<div onclick="window.location.href='index_st4.html';">좌석 배정</div>
-							<div onclick="window.location.href='index_st5.html';">탑승권 발급</div>
-					</div>
+			<div class="ags-header">
+				<a href="javascript:history.back();" class="btn_back">뒤로가기</a>
+				<div class="ags-header-logo"></div>
+			</div>	
+			<div class="gnb_menu">
+				<div class="finger_demo1" style="display: none;"></div>
+				
+				<div class="demo_gnb_menu2_2"></div> 
+				<div class="demo_gnb_menu3">
+						<div onclick="window.location.href='index_st1.html';">예약자 확인</div>						
+						<div onclick="window.location.href='index_st4.html';">좌석 배정</div>
+						<div onclick="window.location.href='index_st5.html';">탑승권 발급</div>
 				</div>
-				<div class="select_boxbtn" style="display: none;">
-					<div class="select_backbtn active" flyInfo="1">
-						<button id="ags-wrap-back" class="btn_back_c">
-							<div class="boxbtn_flyb">
-								<div class="de_ways2">ICN</div>
-								<div class="de_ways3">비행기이미지</div>
-								<div class="de_ways4">CXR</div>
-							</div>
-						</button>
-					</div>
-					<div class="select_comebtn" flyInfo="2">
-						<button id="ags-wrap" class="btn_come_c">
-							<div class="boxbtn_flyb">
-								<div class="de_ways2">CXR</div>
-								<div class="de_ways3">비행기이미지</div>
-								<div class="de_ways4">ICN</div>
-							</div>
-						</button>
-					</div>
+			</div>
+			
+			
+			<div class="select_boxbtn" style="display: none;">
+				<div class="select_backbtn active" flyInfo="1">
+					<button id="ags-wrap-back" class="btn_back_c">
+						<div class="boxbtn_flyb">
+							<div class="de_ways2">ICN</div>
+							<div class="de_ways3">비행기이미지</div>
+							<div class="de_ways4">CXR</div>
+						</div>
+					</button>
 				</div>
-				<div class="header_txt1">
+				<div class="select_comebtn" flyInfo="2">
+					<button id="ags-wrap" class="btn_come_c">
+						<div class="boxbtn_flyb">
+							<div class="de_ways2">CXR</div>
+							<div class="de_ways3">비행기이미지</div>
+							<div class="de_ways4">ICN</div>
+						</div>
+					</button>
+				</div>
+			</div>
+			<div class="header_txt1">
 					<div class="header_txt_ai">
 						<div>
 							<img src="./resource/img/common/ai.png">
